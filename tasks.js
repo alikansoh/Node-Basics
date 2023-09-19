@@ -34,11 +34,16 @@ function startApp(name){
  * @returns {void}
  */
 function onDataReceived(text) {
+
+
   if (text === 'quit\n' || text === 'exit\n') {
     quit();
   }
   else if(text === 'hello\n'){
     hello();
+  }
+  else if(text === 'help\n') {
+    help();
   }
   else{
     unknownCommand(text);
@@ -77,6 +82,9 @@ function quit(){
   console.log('Quitting now, goodbye!')
   process.exit();
 }
+  function help() {
+    console.log('we have 2 commands \n hello to greeting you  \n  quit or exit to exit the application')
+  }
 
 // The following line starts the application
 startApp("Ali Kansoh")
