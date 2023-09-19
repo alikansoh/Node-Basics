@@ -82,6 +82,12 @@ function quit(){
   console.log('Quitting now, goodbye!')
   process.exit();
 }
+
+/**
+ * help the user to add new command
+ *
+ * @returns {void}
+ */
   function help() {
     console.log('we have 2 commands \n hello to greeting you  \n  quit or exit to exit the application')
   }
