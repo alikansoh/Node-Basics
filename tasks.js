@@ -115,7 +115,7 @@ function list() {
 
 function add(text) {
     command =text.slice(4,text.length)
-    if(command.length!=0) {
+    if(command.trim().length!=0) {
       listArray.push(command)
       console.log(`added task ${command}`)
     }
