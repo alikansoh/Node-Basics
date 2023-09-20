@@ -58,6 +58,10 @@ function onDataReceived(text) {
   else if((text.slice(0,6))==='remove'){
     remove(text);
   }
+
+  else if((text.slice(0,4))==='edit'){
+    edit(text);
+  }
   else if(text === 'help\n') {
     help();
   }
@@ -116,23 +120,57 @@ function list() {
     console.log(`${i+1}-${listArray[i]}\n`);
   }
 }
-
+//add command to list array
 function add(text) {
     command =text.slice(4,text.length)
-    if(command.trim().length!=0) {
-      listArray.push(command)
+    if(command.trim().length!=0) { // if command is empty
+      listArray.push(command) // push to array
       console.log(`added task ${command}`)
     }
     else console.log("no command")
 }
 
+// remove command from list
 function remove(text) {
-    index =parseInt(text.slice(7,text.length).trim())
+    index =parseInt(text.slice(7,text.length).trim()) //get index from string
   if(index<=0 || index>=listArray.length+1){
-    console.error("you entered invalid index")
+    console.error("you entered invalid index") // error if index is not exist
   }else {
-  listArray.splice(index - 1, 1);
-  list()}
+  listArray.splice(index - 1, 1); //delete the task using the index
+  list() // showing the list again
+  }
+}
+
+function edit(text) {
+  const divding = text.trim().split(" ");
+
+  // Check if the first word is "edit"
+  if (divding[0].toLowerCase() === "edit") {
+    if (divding.length === 1) {
+      console.log("Error: Please provide an index and new text.");
+    } else if (divding.length === 2) {
+      // If there are two divding, change the last task
+      listArray[listArray.length - 1] = divding[1];
+      console.log(`Edited the last task: \n ${listArray}`);
+    } else if (divding.length >= 3) {
+      // If there are three or more divding, parse the index and change the task
+      const index = parseInt(divding[1]);
+
+      if (!isNaN(index) && index >= 1 && index <= listArray.length) {
+        listArray[index - 1] = divding.slice(2).join(" ");
+        console.log(`Edited task at index ${index} \n ${listArray}`);
+      } else {
+        console.log("Invalid index. Task not edited.");
+      }
+    } else {
+      console.log("Error: Invalid input.");
+    }
+  } else {
+    console.log("Invalid command.");
+  }
+
+
+
 }
 // The following line starts the application
 startApp("Ali Kansoh")
