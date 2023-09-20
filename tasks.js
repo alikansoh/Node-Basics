@@ -33,6 +33,11 @@ function startApp(name){
  * @param  {string} text data typed by the user
  * @returns {void}
  */
+
+var listArray=['hello','quit','help']
+
+
+
 function onDataReceived(text) {
 
 
@@ -42,9 +47,17 @@ function onDataReceived(text) {
   else if((text.slice(0,5))==='hello'){
     hello(text);
   }
+
+  else if((text.slice(0,4))==='list'){
+    list();
+  }
+  else if((text.slice(0,3))==='add'){
+    add(text);
+  }
   else if(text === 'help\n') {
     help();
   }
+
   else{
     unknownCommand(text);
   }
@@ -93,5 +106,20 @@ function quit(){
     console.log('we have 2 commands \n hello to greeting you  \n  quit or exit to exit the application')
   }
 
+function list() {
+  console.log("list of commands")
+  for(let  i=0; i<listArray.length; i++) {
+    console.log(`${i+1}-${listArray[i]}\n`);
+  }
+}
+
+function add(text) {
+    command =text.slice(4,text.length)
+    if(command.length!=0) {
+      listArray.push(command)
+      console.log(`added task ${command}`)
+    }
+    else console.log("no command")
+}
 // The following line starts the application
 startApp("Ali Kansoh")
