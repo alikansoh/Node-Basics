@@ -128,8 +128,11 @@ function add(text) {
 
 function remove(text) {
     index =parseInt(text.slice(7,text.length).trim())
+  if(index<=0 || index>=listArray.length+1){
+    console.error("you entered invalid index")
+  }else {
   listArray.splice(index - 1, 1);
-  list()
+  list()}
 }
 // The following line starts the application
 startApp("Ali Kansoh")
