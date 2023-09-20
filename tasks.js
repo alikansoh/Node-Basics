@@ -54,6 +54,10 @@ function onDataReceived(text) {
   else if((text.slice(0,3))==='add'){
     add(text);
   }
+
+  else if((text.slice(0,6))==='remove'){
+    remove(text);
+  }
   else if(text === 'help\n') {
     help();
   }
@@ -120,6 +124,12 @@ function add(text) {
       console.log(`added task ${command}`)
     }
     else console.log("no command")
+}
+
+function remove(text) {
+    index =parseInt(text.slice(7,text.length).trim())
+  listArray.splice(index - 1, 1);
+  list()
 }
 // The following line starts the application
 startApp("Ali Kansoh")
