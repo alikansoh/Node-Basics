@@ -34,7 +34,23 @@ function startApp(name){
  * @returns {void}
  */
 
-var listArray=['hello','quit','help']
+const listArray = [
+    {
+      task_name: 'add',
+    task_status: false
+  },
+  {
+    task_name: 'delete',
+    task_status: false
+  },
+  {
+  task_name: 'edit',
+  task_status: false
+}
+
+
+
+];
 
 
 
@@ -117,14 +133,15 @@ function quit(){
 function list() {
   console.log("list of commands")
   for(let  i=0; i<listArray.length; i++) {
-    console.log(`${i+1}-${listArray[i]}\n`);
+    console.log(`${i+1}-${listArray[i].task_name}\n`);
   }
 }
 //add command to list array
 function add(text) {
-    command =text.slice(4,text.length)
-    if(command.trim().length!=0) { // if command is empty
-      listArray.push(command) // push to array
+   let command =text.slice(4,text.length)
+
+    if(command.trim().length!==0) { // if command is empty
+      listArray.push({task_name:command,task_status: true}) // push to array
       console.log(`added task ${command}`)
     }
     else console.log("no command")
@@ -132,7 +149,7 @@ function add(text) {
 
 // remove command from list
 function remove(text) {
-    index =parseInt(text.slice(7,text.length).trim()) //get index from string
+   let index =parseInt(text.slice(7,text.length).trim()) //get index from string
   if(index<=0 || index>=listArray.length+1){
     console.error("you entered invalid index") // error if index is not exist
   }else {
@@ -140,28 +157,28 @@ function remove(text) {
   list() // showing the list again
   }
 }
-
+//edit command  from list
 function edit(text) {
-  const divding = text.trim().split(" ");
+  const dividing = text.trim().split(" ");
 
   // Check if the first word is "edit"
-  if (divding[0].toLowerCase() === "edit") {
-    if (divding.length === 1) {
+  if (dividing[0].toLowerCase() === "edit") {
+    if (dividing.length === 1) {
       console.log("Error: Please provide an index and new text.");
-    } else if (divding.length === 2) {
-      // If there are two divding, change the last task
-      listArray[listArray.length - 1] = divding[1];
-      console.log(`Edited the last task: \n ${listArray}`);
-    } else if (divding.length >= 3) {
-      // If there are three or more divding, parse the index and change the task
-      const index = parseInt(divding[1]);
+    } else if (dividing.length === 2) {
+      // If there are two dividing, change the last task
+      listArray[listArray.length - 1].task_name = dividing[1];
+      console.log(`Edited the last task: \n `+listArray[listArray.length - 1].task_name)
+    } else if (dividing.length >= 3) {
+      // If there are three or more dividing, parse the index and change the task
+      const index = parseInt(dividing[1]);
 
       if (!isNaN(index) && index >= 1 && index <= listArray.length) {
-        listArray[index - 1] = divding.slice(2).join(" ");
-        console.log(`Edited task at index ${index} \n ${listArray}`);
+        listArray[index - 1].task_name = dividing.slice(2).join(" ");
+        console.log(`Edited task at index ${index} \n `+listArray[listArray.length - 1].task_name);
       } else {
         console.log("Invalid index. Task not edited.");
-      }
+      } 
     } else {
       console.log("Error: Invalid input.");
     }
