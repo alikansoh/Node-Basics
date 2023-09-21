@@ -37,15 +37,15 @@ function startApp(name){
 const listArray = [
     {
       task_name: 'add',
-    task_status: false
+    done: false
   },
   {
     task_name: 'delete',
-    task_status: false
+    done: false
   },
   {
   task_name: 'edit',
-  task_status: false
+  done: false
 }
 
 
@@ -77,6 +77,14 @@ function onDataReceived(text) {
 
   else if((text.slice(0,4))==='edit'){
     edit(text);
+  }
+
+  else if((text.slice(0,5))==='check'){
+    check(text);
+  }
+
+  else if((text.slice(0,7))==='uncheck'){
+    uncheck(text);
   }
   else if(text === 'help\n') {
     help();
@@ -141,7 +149,7 @@ function add(text) {
    let command =text.slice(4,text.length)
 
     if(command.trim().length!==0) { // if command is empty
-      listArray.push({task_name:command,task_status: true}) // push to array
+      listArray.push({task_name:command,done: true}) // push to array
       console.log(`added task ${command}`)
     }
     else console.log("no command")
@@ -168,26 +176,43 @@ function edit(text) {
     } else if (dividing.length === 2) {
       // If there are two dividing, change the last task
       listArray[listArray.length - 1].task_name = dividing[1];
-      console.log(`Edited the last task: \n `+listArray[listArray.length - 1].task_name)
+      console.log(`Edited the last task: \n ` + listArray[listArray.length - 1].task_name)
     } else if (dividing.length >= 3) {
       // If there are three or more dividing, parse the index and change the task
       const index = parseInt(dividing[1]);
 
       if (!isNaN(index) && index >= 1 && index <= listArray.length) {
         listArray[index - 1].task_name = dividing.slice(2).join(" ");
-        console.log(`Edited task at index ${index} \n `+listArray[listArray.length - 1].task_name);
+        console.log(`Edited task at index ${index} \n ` + listArray[listArray.length - 1].task_name);
       } else {
         console.log("Invalid index. Task not edited.");
-      } 
+      }
     } else {
       console.log("Error: Invalid input.");
     }
   } else {
     console.log("Invalid command.");
   }
-
-
-
 }
+function check(text) {
+  let index = parseInt(text.slice(6, text.length).trim())
+  if (text.length <= 6)
+    console.error("you entered invalid index") // error if index is not exist
+
+  else {
+    listArray[index].done = true
+    console.log(listArray[index].done)
+  }
+}
+  function uncheck(text) {
+    let index = parseInt(text.slice(8, text.length).trim())
+    if (text.length <= 8)
+      console.error("you entered invalid index") // error if index is not exist
+
+    else {
+      listArray[index].done = false
+      console.log(listArray[index].done)
+    }
+  }
 // The following line starts the application
 startApp("Ali Kansoh")

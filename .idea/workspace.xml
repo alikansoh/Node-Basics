@@ -23,6 +23,20 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "alikansoh"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="bea56fba-8d1d-4f86-ae03-75e3c90a874c" />
+        <option name="url" value="git@github.com:alikansoh/Node-Basics.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -64,7 +78,7 @@
       <workItem from="1695189755356" duration="5476000" />
       <workItem from="1695213122824" duration="1055000" />
       <workItem from="1695236298999" duration="7436000" />
-      <workItem from="1695275678372" duration="5516000" />
+      <workItem from="1695275678372" duration="8650000" />
     </task>
     <servers />
   </component>
