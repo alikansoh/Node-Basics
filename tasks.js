@@ -33,26 +33,20 @@ function startApp(name){
  * @param  {string} text data typed by the user
  * @returns {void}
  */
+const fs = require('fs');
+let listArray=[]
+fs.readFile("./database.json", "utf8", (err, jsonString) => {
+  if (err) {
+    console.log("Error reading file from disk:", err);
+    return;
+  }
+  try {
+    listArray = JSON.parse(jsonString);
 
-const listArray = [
-    {
-      task_name: 'add',
-    done: false
-  },
-  {
-    task_name: 'delete',
-    done: false
-  },
-  {
-  task_name: 'edit',
-  done: false
-}
-
-
-
-];
-
-
+  } catch (err) {
+    console.log("Error parsing JSON string:", err);
+  }
+});
 
 function onDataReceived(text) {
 
@@ -126,6 +120,17 @@ console.log(newname)
  */
 function quit(){
   console.log('Quitting now, goodbye!')
+  const jsonArray = JSON.stringify(listArray);
+
+  fs.writeFileSync('database.json', jsonArray, (err) => {
+    if (err) {
+      console.error('Error writing to file:', err);
+    } else {
+      console.log('JSON data has been saved to myArray.json');
+    }
+  });
+
+
   process.exit();
 }
 
@@ -135,7 +140,9 @@ function quit(){
  * @returns {void}
  */
   function help() {
-    console.log('we have 2 commands \n hello to greeting you  \n  quit or exit to exit the application')
+    console.log(`we have ${listArray.length} commands 
+ hello to greeting you  
+  quit or exit to exit the application list to list all commands delete to delete command edit to edit command check to make it done and uncheck to undone`)
   }
 
 function list() {
@@ -211,8 +218,7 @@ function check(text) {
 
     else {
       listArray[index].done = false
-      console.log(listArray[index].done)
-    }
+      console.log(listArray[index].done)    }
   }
 // The following line starts the application
 startApp("Ali Kansoh")
